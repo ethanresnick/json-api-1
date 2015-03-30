@@ -232,7 +232,7 @@ be a string.
 #### Links <a href="#document-structure-links" id="document-structure-links" class="headerlink"></a>
 
 The value of the `"links"` key is a JSON object (a "links object") that
-represents related resources, keyed by the name of each association.
+represents related resources, keyed by the name of each relationship.
 
 The key `"self"` is reserved within the links object for the resource URL,
 as described below.
@@ -784,7 +784,7 @@ A server **MAY** choose to support requests to sort resource collections
 according to one or more criteria ("sort fields").
 
 > Note: Although recommended, sort fields do not necessarily need to
-correspond to resource attribute and association names.
+correspond to resource attribute and relationship names.
 
 > Note: It is recommended that dot-separated (U+002E FULL-STOP, ".") sort
 fields be used to request sorting based upon relationship attributes. For
@@ -792,8 +792,9 @@ example, a sort field of `+author.name` could be used to request that the
 primary data be sorted based upon the `name` attribute of the `author`
 relationship.
 
-An endpoint **MAY** support requests to sort the primary data with a `sort`
-query parameter. The value for `sort` **MUST** represent sort fields.
+If an endpoint for a collection supports requests to sort its primary data, it
+**MUST** receive these requests through a `sort` query parameter. The value for
+`sort` **MUST** represent one or more sort fields.
 
 ```text
 GET /people?sort=+age
