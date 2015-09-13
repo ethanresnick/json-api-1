@@ -80,14 +80,24 @@ don’t can be easily [worked around](/recommendations/#patchless-clients).
 
 ## Is there a JSON Schema describing JSON API? <a href="#is-there-a-json-schema-describing-json-api" id="is-there-a-json-schema-describing-json-api" class="headerlink"></a>
 
-Yes, you can find the JSON Schema definition at
-[http://jsonapi.org/schema](http://jsonapi.org/schema). This schema is as
-restrictive as possible, but has flexibility to be extended within your
-documentation. Validation will not yield false negatives, but could yield false
-positives for the sake of flexibility.
+Yes, you can find the [JSON Schema](http://json-schema.org) definition at
+[http://jsonapi.org/schema](http://jsonapi.org/schema). However, **don’t use
+this schema as your only source of validation**. It only checks whether
+there are some contexts in which the JSON API document would be valid; it
+doesn't gaurantee that it’s valid in _every context_.
 
-You can find more information about the JSON Schema format at
-[http://json-schema.org](http://json-schema.org).
+In particular, this schema allows resource objects that don’t contain an `id`,
+because no `id` is necessary on the request to create a resource. However, for
+all other cases, an `id` is required, so you have to check that it’s provided.
+
+Also, this schema allows documents that have unknown JSON keys in
+specification-defined objects (relationship objects, link objects, etc.).
+These documents are allowed because clients or servers that are _reading_
+them must accept them, and simply ignore the unknown keys. However, if you’re
+testing whether your implementation properly _generates_ JSON API documents,
+you must ensure that it does not output any extra keys. (By having recipients
+ignore unknown keys, and senders not include them, JSON API is able to define
+new keys later without breaking existing implementations.)
 
 ## Why are resource collections returned as arrays instead of sets keyed by ID? <a href="#resource-collections-returned-as-arrays" id="resource-collections-returned-as-arrays" class="headerlink"></a>
 

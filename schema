@@ -13,7 +13,7 @@
       "$ref": "#/definitions/info"
     }
   ],
-  
+
   "definitions": {
     "success": {
       "type": "object",
@@ -50,7 +50,7 @@
           "$ref": "#/definitions/jsonapi"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": true
     },
     "failure": {
       "type": "object",
@@ -72,7 +72,7 @@
           "$ref": "#/definitions/jsonapi"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": true
     },
     "info": {
       "type": "object",
@@ -90,9 +90,9 @@
           "$ref": "#/definitions/jsonapi"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": true
     },
-    
+
     "meta": {
       "description": "Non-standard meta-information that can not be represented as an attribute or relationship.",
       "type": "object",
@@ -115,11 +115,10 @@
       ]
     },
     "resource": {
-      "description": "\"Resource objects\" appear in a JSON API document to represent resources.",
+      "description": "\"Resource objects\" appear in a JSON API document to represent resources. Ids are required, except on the creation request.",
       "type": "object",
       "required": [
-        "type",
-        "id"
+        "type"
       ],
       "properties": {
         "type": {
@@ -141,9 +140,9 @@
           "$ref": "#/definitions/meta"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": true
     },
-    
+
     "links": {
       "description": "A resource object **MAY** contain references to other resource objects (\"relationships\"). Relationships may be to-one or to-many. Relationships can be specified by including a member in a resource's links object.",
       "type": "object",
@@ -181,7 +180,8 @@
             "meta": {
               "$ref": "#/definitions/meta"
             }
-          }
+          },
+          "additionalProperties": true
         }
       ]
     },
@@ -221,7 +221,7 @@
               "$ref": "#/definitions/meta"
             }
           },
-          "additionalProperties": false
+          "additionalProperties": true
         }
       },
       "additionalProperties": false
@@ -267,7 +267,7 @@
           "$ref": "#/definitions/meta"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": true
     },
     "pagination": {
       "type": "object",
@@ -300,9 +300,10 @@
             { "type": "null" }
           ]
         }
-      }
+      },
+      "additionalProperties": true
     },
-    
+
     "jsonapi": {
       "description": "An object describing the server's implementation",
       "type": "object",
@@ -314,9 +315,9 @@
           "$ref": "#/definitions/meta"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": true
     },
-    
+
     "error": {
       "type": "object",
       "properties": {
@@ -360,7 +361,7 @@
           "$ref": "#/definitions/meta"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": true
     }
   }
 }
